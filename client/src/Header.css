@@ -1,0 +1,23 @@
+.header {
+    background-color : #131921;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top : 0;
+    z-index: 100;
+}
+
+
+.header_logo {
+    width : 100px;
+    object-fit: contain;
+    margin-left : 20px;
+    margin-right : 20px;
+    margin-top : 18px;
+}
+
+
+.header_nav {
+    display: flex;
+    justify-content: space-evenly;
+}
