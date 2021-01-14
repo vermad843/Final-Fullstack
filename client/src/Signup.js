@@ -3,8 +3,8 @@ import './Signup.css';
 
 function Signup() {
     const [name, setName] = useState({
-        firstName : '',
-        lastName : '',
+        firstname : '',
+        lastname : '',
         mobileNumber : '',
         address : '',
         aadharNumber : ''
@@ -20,13 +20,30 @@ function Signup() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const users = {
-            firstName : name.firstName,
-            lastName : name.lastName,
+            firstname : name.firstname,
+            lastname : name.lastname,
             mobileNumber : name.mobileNumber,
-            address : name.address,
-            aadharNumber : name.aadharNumber
+            fullAddress : name.address,
+            aadharCard : name.aadharNumber
         };
-        console.log(users);
+        fetch('http://localhost:5000/auth/signup', {
+            method : 'POST',
+            body : JSON.stringify(users),
+            headers : {
+                'content-type' : 'application/json'
+            },
+        }).then(res => {
+            if(res) {
+                return res.json();
+            }
+            return res.json().then(error => {
+                throw new Error(error.message);
+            });
+        }).then((user) => {
+            console.log(user);
+        }).catch(error => {
+            console.log(error);
+        });
     }
 
     return (
@@ -40,7 +57,7 @@ function Signup() {
                           type = "text"
                           className = ""
                           placeholder = "First Name"
-                          name = "firstName"
+                          name = "firstname"
                           onChange = {handleChange}
                           />
                    </div>
@@ -50,7 +67,7 @@ function Signup() {
                           type = "text"
                           className = ""
                           placeholder = "Last Name"
-                          name = "lastName"
+                          name = "lastname"
                           onChange = {handleChange}
                           />
                    </div><div className = "mobileNumber">

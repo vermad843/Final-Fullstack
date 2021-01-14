@@ -15,7 +15,7 @@ router.get('/', (req,res) => {
 });
 
 
-router.post('/signup', (req, res,next) => {
+router.post('/signup', (req, res, next) => {
    const result = req.body;
    if(result) {
       users.findOne({
@@ -23,24 +23,25 @@ router.post('/signup', (req, res,next) => {
       }).then(number => {
          if(number) {
             const err = new Error('this number already exist');
+            res.status(409);
             next(err);
          }else {
-            bcrypt.hash(req.body.aadharCard.trim(), 12).then(hashedAadhar => {
-                 const newUser = {
-                  "firstname" : req.body.firstname,
-                  "lastname" : req.body.lastname,
-                  "mobileNumber" : req.body.mobileNumber,
-                  "fullAddress" : req.body.fullAddress,
-                  "aadharCard" : hashedAadhar
+            bcrypt.hash(req.body.aadharCard, 12).then(hashedAadhar => {
+               const newUser = {
+                  firstname : req.body.firstname,
+                  lastname : req.body.lastname,
+                  mobileNumber : req.body.mobileNumber,
+                  fullAddress : req.body.fullAddress,
+                  aadharCard : hashedAadhar
                  };
-                
                  users.insert(newUser).then(insertedUser => {
-                    res.json(insertedUser);
-                 });
+                  res.json(insertedUser);
+               }); 
              });
          }
       });
    }else {
+      res.status(422);
       next(result.error);
    }
 });
