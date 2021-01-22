@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from './Header';
-import Signup from './Signup';
+import Header from './Components/Header';
+import Signup from './Components/Signup';
 
 function App() {
   return (

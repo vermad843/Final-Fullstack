@@ -1,7 +1,11 @@
 import React,{useState} from 'react';
 import './Signup.css';
+import Login from './Login';
 
 function Signup() {
+    const [loading, setLoading] = useState(false);
+    const [eligible, setEligible ] = useState(false);
+
     const [name, setName] = useState({
         firstname : '',
         lastname : '',
@@ -26,6 +30,11 @@ function Signup() {
             fullAddress : name.address,
             aadharCard : name.aadharNumber
         };
+
+        setLoading({
+            loading : true
+        })
+         
         fetch('http://localhost:5000/auth/signup', {
             method : 'POST',
             body : JSON.stringify(users),
@@ -40,15 +49,28 @@ function Signup() {
                 throw new Error(error.message);
             });
         }).then((user) => {
-            console.log(user);
+            setLoading({
+                loading : false
+            }) ;
+            setEligible({
+                eligible : !eligible
+              })
+              console.log(user)
+           
         }).catch(error => {
             console.log(error);
         });
+
+        
     }
 
     return (
-        <div className = "wrapper">
-            <div className = "form-wrapper">
+        <>
+         {eligible ? <Login/> : 
+        <div className = "wrapper">        
+            { loading ?  <img src = "./loading.gif"/> :
+            
+           (<div className = "form-wrapper">
                 <h1>Create Account</h1>
                 <form onSubmit = {handleSubmit}>
                    <div className = "firstName">
@@ -101,13 +123,14 @@ function Signup() {
                           />
                    </div>
                    <div className = "createAccount">
-                       <button type = "submit">Create Account</button>
+                        <button type = "submit">Create Account</button>
                        <small>Already Have An Account?</small>
                    </div>
                 </form>
-            </div>
-        </div>
+            </div>)}
+        </div>}
+        </>
     )
 }
 
-export default Signup
+export default Signup;
