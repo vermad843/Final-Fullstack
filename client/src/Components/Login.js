@@ -1,8 +1,18 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import './Signup.css';
 
-function Signup() {
+function Login() {
+
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:5000/auth/signup')
+        .then(res => res.json())
+        .then(data =>setData(data));
+    });
+    
     return (
+        <>
         <div className = "wrapper">
             <div className = "form-wrapper">
                 <h1>Login</h1>
@@ -32,7 +42,25 @@ function Signup() {
                 </form>
             </div>
         </div>
+        <section>
+            {
+                data.map((user) => {
+                    return(
+                        <div key = {user._id} className = "user " >
+                           <li className = "w3-card w3-yellow">
+                               <h3>{user.firstname}</h3>
+                               <h3>{user.lastname}</h3>
+                               <h3>{user.fullAddress}</h3>
+                           </li>
+                           <br/>
+                        </div>
+                       
+                    )
+                })
+            }
+            </section>
+        </>
     )
 }
 
-export default Signup
+export default Login;

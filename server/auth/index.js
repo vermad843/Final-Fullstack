@@ -15,6 +15,14 @@ router.get('/', (req,res) => {
 });
 
 
+router.get('/signup', (req, res, next) => {
+   users
+   .find()
+   .then(user => {
+     res.json(user);
+   }).catch(next);
+});
+
 router.post('/signup', (req, res, next) => {
    const result = req.body;
    if(result) {
