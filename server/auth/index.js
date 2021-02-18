@@ -1,9 +1,9 @@
 const express = require('express');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');//for hashing the aadhar card
 
 const db = require('../db/connection.js');
 const users = db.get('users');
-users.createIndex('mobileNumber', {unique : true});
+users.createIndex('mobileNumber', {unique : true});//unique mobile no
 
 const router =  express.Router();
 
@@ -15,7 +15,7 @@ router.get('/', (req,res) => {
 });
 
 
-router.get('/signup', (req, res, next) => {
+router.get('/signup', (req, res, next) => {  // got getting the data from db
    users
    .find()
    .then(user => {
@@ -23,7 +23,7 @@ router.get('/signup', (req, res, next) => {
    }).catch(next);
 });
 
-router.post('/signup', (req, res, next) => {
+router.post('/signup', (req, res, next) => {      // for creating the details
    const result = req.body;
    if(result) {
       users.findOne({

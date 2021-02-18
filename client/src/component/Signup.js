@@ -7,8 +7,8 @@ function Signup() {
     const [eligible, setEligible ] = useState(false);
 
     const [name, setName] = useState({
-        firstname : '',
-        lastname : '',
+        firstName : '',
+        lastName : '',
         mobileNumber : '',
         address : '',
         aadharNumber : ''
@@ -24,8 +24,8 @@ function Signup() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const users = {
-            firstname : name.firstname,
-            lastname : name.lastname,
+            firstName : name.firstName,
+            lastName : name.lastName,
             mobileNumber : name.mobileNumber,
             fullAddress : name.address,
             aadharCard : name.aadharNumber
@@ -79,7 +79,7 @@ function Signup() {
                           type = "text"
                           className = ""
                           placeholder = "First Name"
-                          name = "firstname"
+                          name = "firstName"
                           onChange = {handleChange}
                           />
                    </div>
@@ -89,7 +89,7 @@ function Signup() {
                           type = "text"
                           className = ""
                           placeholder = "Last Name"
-                          name = "lastname"
+                          name = "lastName"
                           onChange = {handleChange}
                           />
                    </div><div className = "mobileNumber">

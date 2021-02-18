@@ -6,7 +6,7 @@ function Header() {
             <nav className = "header">
              <img 
                 className = "header_logo" 
-                src = "http://pngimg.com/uploads/amazon/amazon_PNG11.png"
+                src = "logo.png"
                 alt = ""    
                 />
           <div className = "header_nav">
